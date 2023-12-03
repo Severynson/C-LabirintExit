@@ -45,6 +45,38 @@ void Map<ARRAY_LENGTH, ARRAY_WIDTH>::display()
 };
 
 template <int ARRAY_LENGTH, int ARRAY_WIDTH>
-void Map<ARRAY_LENGTH, ARRAY_WIDTH>::getEntrancePoint() {
-    // for(int i = 0; i < ARRAY_LENGTH)
+void Map<ARRAY_LENGTH, ARRAY_WIDTH>::findEntrancePoint()
+{
+    for (int i = 0; i < ARRAY_LENGTH; ++i)
+    {
+        for (int j = 0; j < ARRAY_WIDTH; ++j)
+        {
+            if ((i == 0 || i == ARRAY_LENGTH - 1) || (j == 0 || j == ARRAY_WIDTH - 1))
+            {
+                if (map[i * ARRAY_WIDTH + j] == 1)
+                {
+                    if (!this->exitIndex)
+                    {
+                        this->exitIndex = i * ARRAY_WIDTH + j;
+                    }
+                    else
+                    {
+                        if (this->entranceIndex)
+                        {
+                            throw("More than one entrance detected!");
+                        }
+                        this->entranceIndex = i * ARRAY_WIDTH + j;
+                    }
+                }
+            }
+        }
+    }
+
+    if (this->exitIndex == 0)
+    {
+        throw("No exit found!"); // Throws error if this->exitIndex is still zero
+    }
+
+    std::cout << "Entrance: " << this->entranceIndex << ", Exit: " << this->exitIndex << std::endl;
+    std::cout << ARRAY_LENGTH << ' ' << ARRAY_WIDTH << std::endl;
 }

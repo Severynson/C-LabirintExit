@@ -34,4 +34,5 @@ template <int ARRAY_LENGTH, int ARRAY_WIDTH>
 void wayOutSeeker(Map<ARRAY_LENGTH, ARRAY_WIDTH> &map)
 {
     map.display();
+    map.findEntrancePoint();
 }
