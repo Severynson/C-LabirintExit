@@ -1,5 +1,9 @@
 #include <iostream>
 #include "include/Map.h"
+#include "include/Node.h"
+
+template <int ARRAY_LENGTH, int ARRAY_WIDTH>
+void wayOutSeeker(Map<ARRAY_LENGTH, ARRAY_WIDTH> &map);
 
 const int ARRAY_LENGTH = 10;
 const int ARRAY_WIDTH = ARRAY_LENGTH;
@@ -21,7 +25,13 @@ int main()
 {
     Map<ARRAY_LENGTH, ARRAY_WIDTH> myMap(a);
 
-    myMap.display();
+    wayOutSeeker(myMap);
 
     return 0;
+}
+
+template <int ARRAY_LENGTH, int ARRAY_WIDTH>
+void wayOutSeeker(Map<ARRAY_LENGTH, ARRAY_WIDTH> &map)
+{
+    map.display();
 }

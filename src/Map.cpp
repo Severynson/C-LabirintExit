@@ -1,4 +1,4 @@
-#include "../include/Map.h";
+#include "../include/Map.h"
 
 template <int ARRAY_LENGTH, int ARRAY_WIDTH>
 Map<ARRAY_LENGTH, ARRAY_WIDTH>::Map(const int (&a)[ARRAY_LENGTH][ARRAY_WIDTH])
@@ -26,7 +26,7 @@ void Map<ARRAY_LENGTH, ARRAY_WIDTH>::display()
     system("cls");
 #else
     system("clear");
-#endif;
+#endif
 
     for (int i = 0; i < ARRAY_LENGTH; ++i)
     {
@@ -43,3 +43,8 @@ void Map<ARRAY_LENGTH, ARRAY_WIDTH>::display()
             std::this_thread::sleep_for(std::chrono::milliseconds(1000));
     }
 };
+
+template <int ARRAY_LENGTH, int ARRAY_WIDTH>
+void Map<ARRAY_LENGTH, ARRAY_WIDTH>::getEntrancePoint() {
+    // for(int i = 0; i < ARRAY_LENGTH)
+}
