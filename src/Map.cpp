@@ -1,4 +1,5 @@
 #include "../include/Map.h"
+#include "../include/Node.h"
 
 template <int ARRAY_LENGTH, int ARRAY_WIDTH>
 Map<ARRAY_LENGTH, ARRAY_WIDTH>::Map(const int (&a)[ARRAY_LENGTH][ARRAY_WIDTH])
@@ -45,7 +46,7 @@ void Map<ARRAY_LENGTH, ARRAY_WIDTH>::display()
 };
 
 template <int ARRAY_LENGTH, int ARRAY_WIDTH>
-void Map<ARRAY_LENGTH, ARRAY_WIDTH>::findEntrancePoint()
+void Map<ARRAY_LENGTH, ARRAY_WIDTH>::findEntrancePoints()
 {
     for (int i = 0; i < ARRAY_LENGTH; ++i)
     {
@@ -79,4 +80,11 @@ void Map<ARRAY_LENGTH, ARRAY_WIDTH>::findEntrancePoint()
 
     std::cout << "Entrance: " << this->entranceIndex << ", Exit: " << this->exitIndex << std::endl;
     std::cout << ARRAY_LENGTH << ' ' << ARRAY_WIDTH << std::endl;
-}
+};
+
+template <int ARRAY_LENGTH, int ARRAY_WIDTH>
+void Map<ARRAY_LENGTH, ARRAY_WIDTH>::findExitWay()
+{
+    this->display();
+    this->findEntrancePoints();
+};
