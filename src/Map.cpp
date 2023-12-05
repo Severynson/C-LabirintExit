@@ -21,6 +21,9 @@ void Map<ARRAY_LENGTH, ARRAY_WIDTH>::display()
     const std::string greenSquare = "\033[3;42;30m \033[0m\033[3;42;30m \033[0m";
     const std::string whiteSquare = "\033[3;47;35m \033[0m\033[3;47;35m \033[0m";
     const std::string emptySquare = "  ";
+    const std::string entrance = "\U0001F530";
+    const std::string exit = "\U0001F3C6";
+    const std::string fence = "\U0001F6A7";
 
     // Clearing the old one frame before showing the new one;
 #if _WIN32
@@ -34,10 +37,16 @@ void Map<ARRAY_LENGTH, ARRAY_WIDTH>::display()
         for (int j = 0; j < ARRAY_WIDTH; ++j)
         {
 
-            if (mapArray2D[i][j] == 1)
-                std::cout << emptySquare;
-            else
-                std::cout << whiteSquare;
+            if (map[i * ARRAY_WIDTH + j] == 0)
+                std::cout << whiteSquare << std::flush;
+            else if (map[i * ARRAY_WIDTH + j] == 1)
+                std::cout << emptySquare << std::flush;
+            else if (map[i * ARRAY_WIDTH + j] == 2)
+                std::cout << fence << std::flush;
+            else if (map[i * ARRAY_WIDTH + j] == 3)
+                std::cout << entrance << std::flush;
+            else if (map[i * ARRAY_WIDTH + j] == 4)
+                std::cout << exit << std::flush;
         }
         std::cout << std::endl;
         if (i == ARRAY_LENGTH - 1)
@@ -59,6 +68,7 @@ void Map<ARRAY_LENGTH, ARRAY_WIDTH>::findEntrancePoints()
                     if (!this->exitIndex)
                     {
                         this->exitIndex = i * ARRAY_WIDTH + j;
+                        this->map[i * ARRAY_WIDTH + j] = 4; // Exit;
                     }
                     else
                     {
@@ -67,7 +77,12 @@ void Map<ARRAY_LENGTH, ARRAY_WIDTH>::findEntrancePoints()
                             throw("More than one entrance detected!");
                         }
                         this->entranceIndex = i * ARRAY_WIDTH + j;
+                        this->map[i * ARRAY_WIDTH + j] = 3; // Entrance;
                     }
+                }
+                else
+                {
+                    this->map[i * ARRAY_WIDTH + j] = 2; // Fence;
                 }
             }
         }
@@ -78,6 +93,8 @@ void Map<ARRAY_LENGTH, ARRAY_WIDTH>::findEntrancePoints()
         throw("No exit found!"); // Throws error if this->exitIndex is still zero
     }
 
+    this->display();
+
     std::cout << "Entrance: " << this->entranceIndex << ", Exit: " << this->exitIndex << std::endl;
     std::cout << ARRAY_LENGTH << ' ' << ARRAY_WIDTH << std::endl;
 };
@@ -85,6 +102,6 @@ void Map<ARRAY_LENGTH, ARRAY_WIDTH>::findEntrancePoints()
 template <int ARRAY_LENGTH, int ARRAY_WIDTH>
 void Map<ARRAY_LENGTH, ARRAY_WIDTH>::findExitWay()
 {
-    this->display();
+    // this->display();
     this->findEntrancePoints();
 };
