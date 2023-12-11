@@ -20,8 +20,8 @@ private:
     // 6) Node dead way branch -------------------- red;
     // 7) Node with founded exit branch --------- green;
     /* */
-    int exitIndex = 0;
-    int entranceIndex = 0;
+    int exitCellIndex = 0;
+    int entranceCellIndex = 0;
 
 
 public:
@@ -34,6 +34,8 @@ public:
     void findEntrancePoints();
 
     void findExitWay();
+
+    void mapNodeStepMaker();
 };
 
 #include "../src/Map.cpp" // Include the implementation file

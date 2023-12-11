@@ -1,5 +1,5 @@
 #include "../include/Map.h"
-#include "../include/Node.h"
+#include "../include/MapNode.h"
 
 template <int ARRAY_LENGTH, int ARRAY_WIDTH>
 Map<ARRAY_LENGTH, ARRAY_WIDTH>::Map(const int (&a)[ARRAY_LENGTH][ARRAY_WIDTH])
@@ -65,18 +65,18 @@ void Map<ARRAY_LENGTH, ARRAY_WIDTH>::findEntrancePoints()
             {
                 if (map[i * ARRAY_WIDTH + j] == 1)
                 {
-                    if (!this->exitIndex)
+                    if (!this->exitCellIndex)
                     {
-                        this->exitIndex = i * ARRAY_WIDTH + j;
+                        this->exitCellIndex = i * ARRAY_WIDTH + j;
                         this->map[i * ARRAY_WIDTH + j] = 4; // Exit;
                     }
                     else
                     {
-                        if (this->entranceIndex)
+                        if (this->entranceCellIndex)
                         {
                             throw("More than one entrance detected!");
                         }
-                        this->entranceIndex = i * ARRAY_WIDTH + j;
+                        this->entranceCellIndex = i * ARRAY_WIDTH + j;
                         this->map[i * ARRAY_WIDTH + j] = 3; // Entrance;
                     }
                 }
@@ -88,20 +88,39 @@ void Map<ARRAY_LENGTH, ARRAY_WIDTH>::findEntrancePoints()
         }
     }
 
-    if (this->exitIndex == 0)
+    if (this->exitCellIndex == 0)
     {
-        throw("No exit found!"); // Throws error if this->exitIndex is still zero
+        throw("No exit found!"); // Throws error if this->exitCellIndex is still zero
     }
 
     this->display();
-
-    std::cout << "Entrance: " << this->entranceIndex << ", Exit: " << this->exitIndex << std::endl;
-    std::cout << ARRAY_LENGTH << ' ' << ARRAY_WIDTH << std::endl;
 };
+
+template <int ARRAY_LENGTH, int ARRAY_WIDTH>
+void Map<ARRAY_LENGTH, ARRAY_WIDTH>::mapNodeStepMaker()
+{
+    int currentStepCellIndex = this->entranceCellIndex;
+
+    MapNode n(currentStepCellIndex, nullptr, false);
+
+    // std::cout << "MapNode.getNodeVector()[0] -> " << MapNode.getNodeVector()[0] << std::endl;
+
+    // while (currentStepCellIndex != this->exitCellIndex)
+    // {
+    //     /* SEEK THE WAY OUT */
+    //     MapNode.getNodeVector();
+    //     MapNode.getNodeVector()[count] = new MapNode(//values//);
+    // }
+}
 
 template <int ARRAY_LENGTH, int ARRAY_WIDTH>
 void Map<ARRAY_LENGTH, ARRAY_WIDTH>::findExitWay()
 {
     // this->display();
     this->findEntrancePoints();
+
+    this->mapNodeStepMaker();
+
+    std::cout << "Entrance: " << this->entranceCellIndex << ", Exit: " << this->exitCellIndex << std::endl;
+    // this->entranceCellIndex
 };
