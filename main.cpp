@@ -1,6 +1,7 @@
 #include <iostream>
 #include "include/Map.h"
 
+
 const int ARRAY_LENGTH = 10;
 const int ARRAY_WIDTH = ARRAY_LENGTH;
 
