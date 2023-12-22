@@ -61,24 +61,12 @@
 
 //////////////////////
 
-// #include "../include/MapNode.h"
-
-// MapNode::MapNode(int regardingMapCell,
-//                  MapNode *parentNode,
-//                  bool isCrossPoint) : regardingMapCell(regardingMapCell), parentNode(parentNode), isCrossPoint(isCrossPoint){};
-
-// std::vector<MapNode *> &MapNode::getNodeVector()
-// {
-//     static std::vector<MapNode *> v;
-//     return v;
-// }
-
 #include "../include/MapNode.h"
 
 std::vector<MapNode *> MapNode::nodeVector; // Define the static member
 
-MapNode::MapNode(int regardingMapCell, MapNode *parentNode, bool isCrossPoint)
-    : regardingMapCell(regardingMapCell), parentNode(parentNode), isCrossPoint(isCrossPoint) {}
+MapNode::MapNode(int regardingMapCell, MapNode* parentNode, bool isCrossPoint, PathBranchStatus status)
+    : regardingMapCell(regardingMapCell), parentNode(parentNode), isCrossPoint(isCrossPoint), pathBranchStatus(status) {}
 
 std::vector<MapNode *> &MapNode::getNodeVector()
 {

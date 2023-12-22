@@ -98,16 +98,26 @@
 #define MAPNODE_H
 
 #include <vector>
+// #include "PathBranchStatus.h"
 
 class MapNode
 {
+public:
+    enum PathBranchStatus
+    {
+        pathInProcess,
+        pathFound,
+        deadWay
+    };
+
 private:
     int regardingMapCell;
     MapNode *parentNode;
     bool isCrossPoint;
+    PathBranchStatus pathBranchStatus;
 
 public:
-    MapNode(int regardingMapCell, MapNode *parentNode, bool isCrossPoint);
+    MapNode(int regardingMapCell, MapNode *parentNode, bool isCrossPoint, PathBranchStatus status);
 
     static std::vector<MapNode *> &getNodeVector();
     static std::vector<MapNode *> nodeVector;

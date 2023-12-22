@@ -101,7 +101,7 @@ void Map<ARRAY_LENGTH, ARRAY_WIDTH>::mapNodeStepMaker()
 {
     int currentStepCellIndex = this->entranceCellIndex;
 
-    MapNode n(currentStepCellIndex, nullptr, false);
+    MapNode n(currentStepCellIndex, nullptr, false, MapNode::pathInProcess);
 
     // std::cout << "MapNode.getNodeVector()[0] -> " << MapNode.getNodeVector()[0] << std::endl;
 
